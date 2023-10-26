@@ -1,0 +1,35 @@
+types CharacterWindow
+{
+	type customizable_gui__window_character__main_characters__icons = flowcontainer {
+		parentanchor = bottom|left
+		position = { 5 -5 }
+		spacing = 5
+		ignoreinvisible = yes
+		direction = vertical
+
+		# Customizable GUI: Stress
+		customizable_gui__window_character__main_characters__icons__stress = {}
+
+		#[ SBfA ]
+		using = SBfA_character_stress_bar
+		#[/ SBfA ]
+
+		# Customizable GUI: Languages
+		customizable_gui__window_character__main_characters__icons__languages = {}
+
+		# Customizable GUI: Barbershop
+		customizable_gui__window_character__main_characters__icons__barbershop = {}
+
+		# Customizable GUI: Kill List
+		customizable_gui__window_character__main_characters__icons__kill_list = {}
+
+		# Customizable GUI: Memories
+		customizable_gui__window_character__main_characters__icons__memories = {}
+
+		# Customizable GUI: Lifestyle Focus
+		customizable_gui__window_character__main_characters__icons__focus = {}
+
+		# Customizable GUI: Inventory
+		customizable_gui__window_character__main_characters__icons__inventory = {}
+	}
+}

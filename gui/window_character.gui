@@ -20,6 +20,7 @@ window = {
 		position_x = 0
 
 		on_start = "[GetVariableSystem.Set( 'hide_bottom_left_HUD', 'true' )]"
+		
 		#[ CTFA ]
 		using = CTFA_character_window_show_state_actions
 		#[/ CTFA ]
@@ -302,8 +303,6 @@ types CharacterWindow
 				maximumsize = { 149 -1 }
 				name = "ai_personality"
 				using = IMHO_player_personality_enabled
-				#visible = "[And(Character.IsLocalPlayer, GetGlobalVariable('IMHO_is_loaded').IsSet, IMHOPlayerPersonalityEnabled)]"
-
 				raw_text = " • #L [Character.GetAIPersonalityNoTooltip]#!"
 				tooltip = "AI_PERSONALITY_TT"
 				using = tooltip_se
