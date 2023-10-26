@@ -1,0 +1,11 @@
+## The Unified UI check if TCT is loaded for the papabile portrait 
+this_is_the_pope_dnasisUI = {
+    scope = character
+	is_shown = {
+		exists = global_var:Trinity_is_loaded
+		OR = {
+			has_title = title:k_papal_state
+			is_pope = yes
+		}
+	}
+}
