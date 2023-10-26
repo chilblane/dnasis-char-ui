@@ -1,0 +1,79 @@
+types CharacterWindow
+{
+	type customizable_gui__window_character__character_info__name_traits_house__name = vbox {
+		name = "name_etc"
+		layoutpolicy_horizontal = expanding
+		#[ SNAT ]
+		SNAT_title_or_position = {}
+		#[/ SNAT ]
+
+		## Name
+		hbox = {
+			layoutpolicy_horizontal = expanding
+			margin = { 3 0 }
+			margin_top = 1
+
+			#[ SNAT ]
+			SNAT_character_name = {}
+			
+			text_single = {
+				visible = "[Not(GetGlobalVariable('SNAT_is_loaded').IsSet)]"
+				name = "character_name_vanilla" #unique name to prevent SNAT conflicts
+				raw_text = "[Character.GetUINameNotMeNoTooltip], "
+				margin_left = 2
+				max_width = 400
+				fontsize = 20
+				fontsize_min = 14
+				align = nobaseline
+				default_format = "#medium"
+				tooltip = "[Character.GetUINameNotMeNoTooltip]"
+			}
+
+			text_single = {
+				visible = "[Not(GetGlobalVariable('SNAT_is_loaded').IsSet)]"
+				name = "character_age"
+				raw_text = " [Character.GetAge]"
+				default_format = "#low"
+				tooltip = "[Character.GetDeathOrBirthDateInfo]"
+				fontsize = 20
+				align = nobaseline
+			}
+
+			hbox = {
+				visible = "[Not(GetGlobalVariable('SNAT_is_loaded').IsSet)]"
+				margin_left = 4
+				spacing = -3
+
+				icon = {
+					visible = "[Not(Character.IsDeadAndValid)]"
+					size = { 23 23 }
+					framesize = { 60 60 }
+					frame = "[Character.GetHealthIconFrame]"
+					texture = "gfx/interface/icons/character_status/icon_health.dds"
+					tooltip = "[Character.GetHealthInfo]"
+				}
+				icon = {
+					visible = "[Character.IsDeadAndValid]"
+					size = { 23 23 }
+					texture = "gfx/interface/icons/character_status/icon_dead.dds"
+					tooltip = "CHARACTER_DEAD_TOOLTIP"
+				}
+			}
+
+			expand = {}
+			#[/ SNAT ]
+
+			#[ RENAMER ]
+        	hbox_mod_renamer = {}
+			#[/ RENAMER ]
+		}
+
+		#[ DBDD ]
+        hbox_mod_birth_death_dates = {}
+		#[/ DBDD ]
+		hbox_character_relation_and_ai = {
+			name = "character_relation_and_ai"
+			margin = { 3 0 }
+		}
+	}
+}

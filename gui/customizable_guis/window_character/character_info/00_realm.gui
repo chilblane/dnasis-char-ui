@@ -1,0 +1,66 @@
+types CharacterWindow
+{
+	type customizable_gui__window_character__character_info__realm = widget {
+		datacontext = "[GetIllustration( 'character_location_exterior' )]"
+		layoutpolicy_horizontal = expanding
+		size = { 0 232 }
+
+		background = {
+			using = Background_Bottom_Fade
+			margin_bottom = 3
+			alpha = 0.75
+		}
+
+		widget = {
+			size = { 100% 100% }
+
+			using = Animation_Character_Window_Refresh
+
+			background = {
+				texture = "[Illustration.GetTexture( Character.MakeScope )]"
+				alpha = 0.35
+				fittype = centercrop
+
+				modify_texture = {
+					texture = "gfx/interface/component_masks/mask_fade_vertical.dds"
+					blend_mode = alphamultiply
+					mirror = vertical
+				}
+
+				using = Mask_Rough_Edges
+			}
+		}
+
+		hbox = {
+			name = "realm_info"
+
+			# Customizable GUI: Realm Shield
+			customizable_gui__window_character__character_info__realm__shield = {}
+
+			vbox = {
+				layoutpolicy_horizontal = expanding
+				layoutpolicy_vertical = expanding
+				margin_left = 5
+
+				# Customizable GUI: Realm name and Stats
+				customizable_gui__window_character__character_info__realm__name_stats = {}
+
+				divider = {
+					layoutpolicy_horizontal = expanding
+				}
+
+				#[ CTFA ]
+				CTFA_vbox_titles_claims_box_1 = {}
+				#[/ CTFA ]
+
+				# Customizable GUI: Titles and Claims without Diplomacy
+				customizable_gui__window_character__character_info__realm__titles_claims_without_diplomacy = {}
+
+				# Customizable GUI: Titles and Claims with Diplomacy
+				customizable_gui__window_character__character_info__realm__titles_claims_with_diplomacy = {}
+
+				expand = {}
+			}
+		}
+	}
+}

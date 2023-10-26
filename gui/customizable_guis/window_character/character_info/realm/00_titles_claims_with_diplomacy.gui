@@ -1,0 +1,219 @@
+types CharacterWindow
+{
+	type customizable_gui__window_character__character_info__realm__titles_claims_with_diplomacy = hbox {
+		visible = "[DataModelHasItems( CharacterWindow.GetDiplomacyItems )]"
+		layoutpolicy_horizontal = expanding
+		layoutpolicy_vertical = expanding
+		margin_right = 2
+
+		#[ CTFA ]
+		CTFA_vbox_titles_claims_box_2 = {}
+		#[/ CTFA ]
+
+		vbox_titles_claims_box = {
+			visible = "[And( Not( Character.GetPrimaryTitle.HasFaction ), LessThanOrEqualTo_int32(GetDataModelSize(CharacterWindow.GetDiplomacyItems), '(int32)4'))]"
+			layoutpolicy_horizontal = expanding
+			layoutpolicy_vertical = expanding
+
+			using = Animation_Character_Window_Refresh
+
+			blockoverride "titles_extra_items"
+			{
+				visible = "[GreaterThan_int32( GetDataModelSize(CharacterWindow.GetTitles), '(int32)10' )]"
+				text = "[GetNumberAbove_int32( GetDataModelSize(CharacterWindow.GetTitles), '(int32)10' )|=]"
+			}
+
+			blockoverride "titles_max_slots"
+			{
+				datamodel_wrap = 10
+			}
+
+			blockoverride "claims_extra_items"
+			{
+				visible = "[GreaterThan_int32( GetDataModelSize(CharacterWindow.GetClaims), '(int32)10' )]"
+				text = "[GetNumberAbove_int32(GetDataModelSize(CharacterWindow.GetClaims), '(int32)10' )|=]"
+			}
+
+
+			blockoverride "claims_max_slots"
+			{
+				datamodel_wrap = 10
+			}
+		}
+
+		#[ CTFA ]
+		CTFA_vbox_titles_claims_box_3 = {}
+		#[/ CTFA ]
+
+		vbox_titles_claims_box = {
+			visible = "[And( Not( Character.GetPrimaryTitle.HasFaction ), And(GreaterThan_int32(GetDataModelSize(CharacterWindow.GetDiplomacyItems), '(int32)4'), LessThanOrEqualTo_int32(GetDataModelSize(CharacterWindow.GetDiplomacyItems), '(int32)6')))]"
+			layoutpolicy_horizontal = expanding
+			layoutpolicy_vertical = expanding
+
+			using = Animation_Character_Window_Refresh
+
+			blockoverride "titles_extra_items"
+			{
+				visible = "[GreaterThan_int32( GetDataModelSize(CharacterWindow.GetTitles), '(int32)9' )]"
+				text = "[GetNumberAbove_int32( GetDataModelSize(CharacterWindow.GetTitles), '(int32)9' )|=]"
+			}
+
+			blockoverride "titles_max_slots"
+			{
+				datamodel_wrap = 9
+			}
+
+			blockoverride "claims_extra_items"
+			{
+				visible = "[GreaterThan_int32( GetDataModelSize(CharacterWindow.GetClaims), '(int32)9' )]"
+				text = "[GetNumberAbove_int32(GetDataModelSize(CharacterWindow.GetClaims), '(int32)9' )|=]"
+			}
+
+			blockoverride "claims_max_slots"
+			{
+				datamodel_wrap = 9
+			}
+		}
+		
+		#[ CTFA ]
+		CTFA_vbox_titles_claims_box_4 = {}
+		#[/ CTFA ]
+
+		vbox_titles_claims_box = {
+			visible = "[And( Not( Character.GetPrimaryTitle.HasFaction ), And(GreaterThan_int32(GetDataModelSize(CharacterWindow.GetDiplomacyItems), '(int32)6'), LessThanOrEqualTo_int32(GetDataModelSize(CharacterWindow.GetDiplomacyItems), '(int32)8')))]"
+			layoutpolicy_horizontal = expanding
+			layoutpolicy_vertical = expanding
+
+			using = Animation_Character_Window_Refresh
+
+			blockoverride "titles_extra_items"
+			{
+				visible = "[GreaterThan_int32( GetDataModelSize(CharacterWindow.GetTitles), '(int32)8' )]"
+				text = "[GetNumberAbove_int32( GetDataModelSize(CharacterWindow.GetTitles), '(int32)8' )|=]"
+			}
+
+			blockoverride "titles_max_slots"
+			{
+				datamodel_wrap = 8
+			}
+
+			blockoverride "claims_extra_items"
+			{
+				visible = "[GreaterThan_int32( GetDataModelSize(CharacterWindow.GetClaims), '(int32)8' )]"
+				text = "[GetNumberAbove_int32(GetDataModelSize(CharacterWindow.GetClaims), '(int32)8' )|=]"
+			}
+
+			blockoverride "claims_max_slots"
+			{
+				datamodel_wrap = 8
+			}
+		}
+		
+		#[ CTFA ]
+		CTFA_vbox_titles_claims_box_5 = {}
+		#[/ CTFA ]
+
+		vbox_titles_claims_box = {
+			visible = "[And( Not( Character.GetPrimaryTitle.HasFaction ), GreaterThan_int32(GetDataModelSize(CharacterWindow.GetDiplomacyItems), '(int32)8'))]"
+			layoutpolicy_horizontal = expanding
+			layoutpolicy_vertical = expanding
+
+			using = Animation_Character_Window_Refresh
+
+			blockoverride "titles_extra_items"
+			{
+				visible = "[GreaterThan_int32( GetDataModelSize(CharacterWindow.GetTitles), '(int32)7' )]"
+				text = "[GetNumberAbove_int32( GetDataModelSize(CharacterWindow.GetTitles), '(int32)7' )|=]"
+			}
+
+			blockoverride "titles_max_slots"
+			{
+				datamodel_wrap = 7
+			}
+
+			blockoverride "claims_extra_items"
+			{
+				visible = "[GreaterThan_int32( GetDataModelSize(CharacterWindow.GetClaims), '(int32)7' )]"
+				text = "[GetNumberAbove_int32(GetDataModelSize(CharacterWindow.GetClaims), '(int32)7' )|=]"
+			}
+
+			blockoverride "claims_max_slots"
+			{
+				datamodel_wrap = 7
+			}
+		}
+
+		expand = {
+			layoutpolicy_horizontal = expanding
+			visible = "[Character.GetPrimaryTitle.HasFaction]"
+		}
+
+		divider = {
+			layoutpolicy_vertical = expanding
+		}
+
+		vbox_diplomacy_box = {
+			visible = "[And(Not(IsDataModelEmpty(CharacterWindow.GetDiplomacyItems)), LessThanOrEqualTo_int32(GetDataModelSize(CharacterWindow.GetDiplomacyItems), '(int32)4'))]"
+			layoutpolicy_vertical = expanding
+
+			using = Animation_Character_Window_Refresh
+
+			blockoverride "diplomacy_slots"
+			{
+				maxverticalslots = 2
+				maxhorizontalslots = 2
+				datamodel_wrap = 2
+			}
+		}
+
+		vbox_diplomacy_box = {
+			visible = "[And(GreaterThan_int32(GetDataModelSize(CharacterWindow.GetDiplomacyItems), '(int32)4'), LessThanOrEqualTo_int32(GetDataModelSize(CharacterWindow.GetDiplomacyItems), '(int32)6'))]"
+			layoutpolicy_vertical = expanding
+
+			using = Animation_Character_Window_Refresh
+
+			blockoverride "diplomacy_slots"
+			{
+				maxverticalslots = 2
+				maxhorizontalslots = 3
+				datamodel_wrap = 3
+			}
+		}
+
+		vbox_diplomacy_box = {
+			visible = "[And(GreaterThan_int32(GetDataModelSize(CharacterWindow.GetDiplomacyItems), '(int32)6'), LessThanOrEqualTo_int32(GetDataModelSize(CharacterWindow.GetDiplomacyItems), '(int32)8'))]"
+			layoutpolicy_vertical = expanding
+
+			using = Animation_Character_Window_Refresh
+
+			blockoverride "diplomacy_slots"
+			{
+				maxverticalslots = 2
+				maxhorizontalslots = 4
+				datamodel_wrap = 4
+			}
+		}
+
+		vbox_diplomacy_box = {
+			visible = "[GreaterThan_int32(GetDataModelSize(CharacterWindow.GetDiplomacyItems), '(int32)8')]"
+			layoutpolicy_vertical = expanding
+
+			using = Animation_Character_Window_Refresh
+
+			blockoverride "diplomacy_extra_items"
+			{
+				visible = "[GreaterThan_int32( GetDataModelSize(CharacterWindow.GetDiplomacyItems), '(int32)10' )]"
+				text = "[GetNumberAbove_int32( GetDataModelSize(CharacterWindow.GetDiplomacyItems), '(int32)10' )|=]"
+			}
+
+			blockoverride "diplomacy_slots"
+			{
+				maxverticalslots = 2
+				maxhorizontalslots = 5
+				datamodel_wrap = 5
+			}
+		}
+
+		expand = {}
+	}
+}

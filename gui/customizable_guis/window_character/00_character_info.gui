@@ -1,0 +1,445 @@
+types CharacterWindow
+{
+	type customizable_gui__window_character__character_info = vbox {
+		layoutpolicy_horizontal = expanding
+		layoutpolicy_vertical = expanding
+
+		hbox = {
+			name = "character_info"
+			layoutpolicy_horizontal = expanding
+			margin = { 0 5 }
+			margin_left = 5
+
+			background = {
+				using = Background_Area_Dark
+				margin_left = 5
+			}
+
+			# Customizable GUI: Name, Traits, House
+			customizable_gui__window_character__character_info__name_traits_house = {}
+		}
+
+		# Customizable GUI: Realm
+		customizable_gui__window_character__character_info__realm = {}
+
+		### BOTTOM AREA
+
+		# Customizable GUI: Tabs
+		customizable_gui__window_character__character_info__bottom_area__tabs = {}
+
+		spacer = { size = { 0 2 } }
+
+		widget = {
+			visible = "[CharacterWindow.AreNoneExpanded]"
+			layoutpolicy_vertical = preferred
+			layoutpolicy_horizontal = expanding
+			size = { 0 330 } # { 0 350 }
+
+			using = Animation_Tab_Switch
+
+			# Customizable GUI: Family
+			customizable_gui__window_character__character_info__bottom_area__family = {}
+
+			# Customizable GUI: Relations
+			customizable_gui__window_character__character_info__bottom_area__relations = {}
+
+			# Customizable GUI: Court
+			customizable_gui__window_character__character_info__bottom_area__court = {}
+
+			# Customizable GUI: Vassals
+			customizable_gui__window_character__character_info__bottom_area__vassals = {}
+		}
+
+		### EXPANDED VIEWS
+
+		# TRAITS EXPANDED
+		scrollbox = {
+			name = "traits_expanded"
+			visible = "[CharacterWindow.AreTraitsExpanded]"
+			layoutpolicy_vertical = expanding
+			layoutpolicy_horizontal = expanding
+
+			using = Animation_Tab_Switch
+
+			blockoverride "scrollbox_content"
+			{
+				spacing = 10
+
+				vbox = {
+					spacing = 10
+
+					text_label_center = {
+						text = "MODIFIERS"
+					}
+
+					text_single = {
+						visible = "[IsDataModelEmpty(CharacterWindow.GetTimedModifiers)]"
+						text = "CV_NO_MODIFIERS"
+						default_format = "#low;italic"
+					}
+
+					dynamicgridbox = {
+						name = "modifiers_grid"
+						datamodel = "[CharacterWindow.GetTimedModifiers]"
+						datamodel_wrap = 8
+						flipdirection = yes
+
+						item = {
+							icon = {
+								size = { 35 35 }
+								alwaystransparent = no
+								texture = "[ModifierItem.GetIcon]"
+								tooltip = "[ModifierItem.GetTooltip]"
+							}
+						}
+					}
+				}
+
+				divider_light = {
+					layoutpolicy_horizontal = expanding
+				}
+
+				vbox = {
+					spacing = 10
+					datacontext = "[CharacterWindow.GetTraitArrays]"
+
+					text_label_center = {
+						text = "TRAITS"
+					}
+
+					fixedgridbox = {
+						name = "personality_traits_grid"
+						datamodel = "[TraitArrays.GetPersonalityTraits]"
+						addcolumn = 85
+						addrow = 105
+						flipdirection = yes
+						datamodel_wrap = 6
+
+						item = {
+							icon_trait = {
+								text_multi = {
+									parentanchor = bottom|hcenter
+									widgetanchor = top|hcenter
+									position = { 0 -5 }
+									autoresize = yes
+									max_width = 80
+									text = "[Trait.GetNameNoTooltip(Character.Self)]"
+									default_format = "#high"
+									align = hcenter
+								}
+							}
+						}
+					}
+
+					fixedgridbox = {
+						name = "traits_grid"
+						datamodel = "[TraitArrays.GetTraits]"
+						addcolumn = 85
+						addrow = 105
+						flipdirection = yes
+						datamodel_wrap = 6
+
+						item = {
+							icon_trait = {
+								text_multi = {
+									parentanchor = bottom|hcenter
+									widgetanchor = top|hcenter
+									position = { 0 -5 }
+									autoresize = yes
+									max_width = 80
+									text = "[Trait.GetNameNoTooltip(Character.Self)]"
+									default_format = "#high"
+									align = hcenter
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+		# TITLES EXPANDED
+		scrollbox = {
+			name = "titles_expanded"
+			visible = "[CharacterWindow.AreTitlesExpanded]"
+			layoutpolicy_vertical = expanding
+			layoutpolicy_horizontal = expanding
+
+			using = Animation_Tab_Switch
+
+			blockoverride "scrollbox_content"
+			{
+				spacing = 15
+
+				text_label_center = {
+					text = "CV_TITLES_NOCOUNT"
+				}
+
+				#[ CTFA ]
+				CTFA_fixedgridbox_titles_box_bishop = {}
+				#[/ CTFA ]
+
+				fixedgridbox = {
+					name = "titles_box_bishop"
+					datacontext = "[CharacterWindow.GetCharacter]"
+					flipdirection = yes
+					addrow = 90
+					addcolumn = 270
+					datamodel_wrap = 2
+
+					#[ CTFA ]
+					using = CTFA_hide_if_has_vanity_title
+					#[/ CTFA ]
+
+					datamodel = "[CharacterWindow.GetTitles]"
+
+					item = {
+						flowcontainer = {
+							datacontext = "[TitleItem.GetTitle]"
+							spacing = 5
+
+							coa_title_small_crown = {
+								using = tooltip_ne
+							}
+
+							text_multi = {
+								text = "[Title.GetNameNoTooltip]"
+								parentanchor = vcenter
+								autoresize = yes
+								default_format = "#high"
+								using = Font_Size_Medium
+								max_width = 190
+								margin_top = 5
+							}
+						}
+					}
+				}
+			}
+		}
+
+		# CLAIMS EXPANDED
+		scrollbox = {
+			name = "claims_expanded"
+			visible = "[CharacterWindow.AreClaimsExpanded]"
+			layoutpolicy_vertical = expanding
+			layoutpolicy_horizontal = expanding
+
+			using = Animation_Tab_Switch
+
+			blockoverride "scrollbox_content"
+			{
+				spacing = 10
+
+				text_label_center = {
+					text = "CV_CLAIMS_NOCOUNT"
+				}
+
+				flowcontainer = {
+					name = "titles_box_bishop"
+					datacontext = "[CharacterWindow.GetCharacter]"
+					datamodel = "[CharacterWindow.GetClaims]"
+					direction = vertical
+					spacing = 10
+
+					item = {
+						flowcontainer = {
+							spacing = 5
+							using = tooltip_ne
+							tooltip = "[Claim.GetTooltip]"
+
+							coa_title_medium = {
+								datacontext = "[Claim.GetTitle]"
+							}
+
+							flowcontainer = {
+								direction = vertical
+								ignoreinvisible = yes
+
+								text_single = {
+									text = "[Claim.GetTitle.GetNameNoTooltip]"
+									default_format = "#high"
+									using = Font_Size_Big
+								}
+
+								text_single = {
+									name = "pressed_claim"
+									visible = "[And(Claim.IsPressed, Not(Claim.IsImplicit))]"
+									text = "[pressed_claim_i][pressed_claim|E]"
+								}
+
+								text_single = {
+									name = "unpressed_claim"
+									visible = "[And(Not(Claim.IsPressed), Not(Claim.IsImplicit))]"
+									text = "[unpressed_claim_i][unpressed_claim|E]"
+								}
+
+								text_single = {
+									name = "implicit_claim"
+									visible = "[Claim.IsImplicit]"
+									text = "[implicit_claim_i][implicit_claim|E]"
+								}
+
+								text_multi = {
+									visible = "[Claim.GetTitle.GetHolder.IsValid]"
+									text = "CLAIM_TITLE_HOLDER"
+									max_width = 400
+									autoresize = yes
+								}
+
+								text_single = {
+									visible = "[Not(Claim.GetTitle.GetHolder.IsValid)]"
+									text = "CLAIM_TITLE_NOT_CREATED"
+									default_format = "#weak"
+									align = nobaseline
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+		# DIPLOMACY EXPANDED
+		scrollbox = {
+			name = "diplomacy_expanded"
+			visible = "[CharacterWindow.AreDiplomacyExpanded]"
+			layoutpolicy_vertical = expanding
+			layoutpolicy_horizontal = expanding
+
+			using = Animation_Tab_Switch
+
+			blockoverride "scrollbox_content"
+			{
+				spacing = 15
+
+				text_label_center = {
+					text = "CV_DIPLOMACY"
+				}
+
+				vbox = {
+					name = "diplomacy_items"
+					datamodel = "[CharacterWindow.GetDiplomacyItems]"
+
+					item = {
+						vbox = {
+							layoutpolicy_horizontal = expanding
+							spacing = 20
+
+							divider_light = {
+								layoutpolicy_horizontal = expanding
+							}
+
+							button_group = {
+								layoutpolicy_horizontal = expanding
+								onclick = "[DiplomacyItem.OnClick]"
+								tooltip = "[DiplomacyItem.GetTooltip]"
+								using = tooltip_se
+
+								hbox = {
+									spacing = 20
+
+									widget = {
+										size = { 65 74 }
+
+										button = {
+											texture = "gfx/interface/icons/diplomatic_icons.dds"
+											frame = "[DiplomacyItem.GetDiplomacyFrame]"
+											parentanchor = top|hcenter
+											position = { 0 -30 }
+											framesize = { 120 120 }
+											size = { 50 50 }
+											tooltip_enabled = no
+											scale = 1.3
+										}
+
+										coa_realm_medium = {
+											visible = "[Not(DiplomacyItem.IsStruggle)]"
+											datacontext = "[DiplomacyItem.GetTargetCharacter]"
+											tooltip = "[DiplomacyItem.GetTooltip]"
+											parentanchor = hcenter
+
+											text_single = {
+												name = "warscore"
+												visible = "[DiplomacyItem.HasWarScore]"
+												parentanchor = hcenter
+												position = { 0 -20 }
+												text = "[DiplomacyItem.GetWarScoreFraction|0%=+]"
+												using = Font_Size_Medium
+											}
+										}
+
+										button = {
+											visible = "[DiplomacyItem.IsStruggle]"
+											datacontext = "[DiplomacyItem.GetStruggle]"
+											position = { 0 -3 }
+											size = { 70 90 }
+											onclick = "[DiplomacyItem.OnClick]"
+
+											datacontext = "[DiplomacyItem.GetTargetCharacter]"
+											tooltipwidget = struggle_tooltip
+											using = tooltip_es
+											tooltip_offset = { 0 22 }
+
+											icon = {
+												name = "involved_banner"
+												visible = "[Struggle.IsInvolvedCharacter(Character.Self)]"
+												size = { 70 90 }
+												texture = "gfx/interface/icons/struggle_banners/involved_banner.dds"
+											}
+
+											icon = {
+												name = "interloper_banner"
+												visible = "[Struggle.IsInterloperCharacter(Character.Self)]"
+												size = { 70 90 }
+												texture = "gfx/interface/icons/struggle_banners/interloper_banner.dds"
+											}
+
+											icon = {
+												parentanchor = center
+												position = { 0 -7 }
+												texture = "[Struggle.GetCurrentPhase.GetIcon]"
+												size = { 40 40 }
+											}
+										}
+									}
+
+									text_multi = {
+										text = "[DiplomacyItem.GetInfo]"
+										layoutpolicy_horizontal = expanding
+										autoresize = yes
+										max_width = 400
+									}
+								}
+							}
+
+							hbox = {
+								name = "reason_characters"
+								visible = "[DiplomacyItem.HasReasonCharacters]"
+
+								portrait_head_small = {
+									name = "reason_character_left"
+									datacontext = "[DiplomacyItem.GetLeftReasonCharacter]"
+									blockoverride "opinion_box" {}
+									blockoverride "status_icons" {}
+								}
+
+								portrait_head_small = {
+									name = "reason_character_right"
+									datacontext = "[DiplomacyItem.GetRightReasonCharacter]"
+									blockoverride "opinion_box" {}
+									blockoverride "status_icons" {}
+
+									blockoverride "portrait_transformation"
+									{
+										portrait_scale = { -1 1 }
+										portrait_offset = { 1 0 }
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

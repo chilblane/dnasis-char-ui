@@ -1,0 +1,82 @@
+types CharacterWindow
+{
+	type customizable_gui__window_character__main_characters = widget {
+		name = "main_characters"
+		datacontext = "[GetIllustration( 'character_view_bg' )]"
+		layoutpolicy_horizontal = expanding
+		size = { 0 305 }
+
+
+		widget = {
+			size = { 100% 100% }
+			using = Animation_Character_Window_Refresh
+
+			background = {
+				texture = "[Illustration.GetTexture( Character.MakeScope )]"
+				fittype = centercrop
+				margin_bottom = 5
+				margin_left = 1
+
+				modify_texture = {
+					texture = "gfx/interface/component_masks/mask_rough_edges_down_right.dds"
+					spriteType = Corneredtiled
+					spriteborder = { 20 20 }
+					blend_mode = alphamultiply
+					texture_density = 2
+				}
+			}
+		}
+
+		# Customizable GUI: Buttons (on the top right corner)
+		customizable_gui__window_character__main_characters__buttons = {}
+
+		# Customizable GUI: Primary Spouse
+		customizable_gui__window_character__main_characters__spouse = {}
+
+		# Customizable GUI: Main Character
+		customizable_gui__window_character__main_characters__main = {}
+
+		expand = {}
+
+		hbox = {
+			margin_top = 50
+			layoutpolicy_horizontal = expanding
+			expand = {}
+
+			# Customizable GUI: Jailor, Imprisoner, and Imprisoned by
+			customizable_gui__window_character__main_characters__jailor = {}
+
+			# Customizable GUI: Hostage Home Court
+			customizable_gui__window_character__main_characters__hostage = {}
+
+			# Customizable GUI: Liege
+			customizable_gui__window_character__main_characters__liege = {}
+		}
+
+		# Customizable GUI: Host
+		customizable_gui__window_character__main_characters__host = {}
+
+		# Customizable GUI: Player Heir (for the local player)
+		customizable_gui__window_character__main_characters__heir_player = {}
+
+		# Customizable GUI: Primary Heir (for everyone else)
+		customizable_gui__window_character__main_characters__heir_primary = {}
+
+		#[ SNAT ]
+		SNAT_The_Catholic_Trinity = {}
+		#[/ SNAT ]
+
+		# Customizable GUI: DEBUG STUFF
+		customizable_gui__window_character__main_characters__debug = {}
+
+		# Customizable GUI: Icons (on the left side)
+		customizable_gui__window_character__main_characters__icons = {}
+
+		#[ CTFA ]
+		CTFA_flowcontainer_edit_character_foa_offset = {}
+		#[/ CTFA ]
+
+		# Customizable GUI: Royal Court
+		customizable_gui__window_character__main_characters__royal_court = {}
+	}
+}

@@ -1,0 +1,75 @@
+types CharacterWindow
+{
+	type customizable_gui__window_character__character_info__name_traits_house__house = widget {
+		name = "house"
+		datacontext = "[Character.GetHouse]"
+		layoutpolicy_vertical = expanding
+		size = { 125 0 }
+
+		using = Animation_Character_Window_Refresh
+
+		vbox = {
+			expand = {
+				maximumsize = { 0 5 }
+			}
+
+			#[ SNAT ]
+			SNAT_character_dynasty = {}
+			#[/ SNAT ]
+
+			coa_house_big = {
+				flowcontainer = {
+					name = "characters_status_in_house"
+					parentanchor = bottom|right
+					position = { -10 0 }
+					ignoreinvisible = yes
+
+					icon = {
+						name = "bastard"
+						visible = "[Not(Character.IsLegitimateMemberOfHouse)]"
+						framesize = { 40 40 }
+						frame = 4
+						size = { 20 20 }
+						texture = "gfx/interface/icons/portraits/relation.dds"
+						tooltip = "CV_TT_BASTARD"
+					}
+
+					icon = {
+						name = "head_icon"
+						visible = "[LessThan_int32(Character.GetDynastyHeadRelationFrame('(bool)no'), '(int32)9')]"
+						size = { 20 20 }
+
+						texture = "gfx/interface/icons/portraits/relation.dds"
+						framesize = { 40 40 }
+						frame = "[Character.GetDynastyHeadRelationFrame('(bool)no')]"
+						tooltip = "[Character.GetDynastyHeadTooltip]"
+					}
+				}
+			}
+
+			#[ SNAT ]
+			SNAT_character_house = {}
+
+			text_multi = {
+				visible = "[Not(GetGlobalVariable('SNAT_is_loaded').IsSet)]"
+				autoresize = yes
+				maximumsize = { 118 50 }
+				text = "[DynastyHouse.GetBaseNameNoTooltip]"
+				default_format = "#high"
+				align = top|hcenter
+			}
+			#[/ SNAT ]
+
+			text_multi = {
+				autoresize = yes
+				maximumsize = { 118 50 }
+				visible = "[Not(DynastyHouse.IsValid)]"
+				text = "[lowborn|E]"
+				default_format = "#high"
+				align = top|hcenter
+			}
+
+			expand = {}
+		}
+	}
+}

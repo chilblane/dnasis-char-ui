@@ -1,0 +1,110 @@
+types CharacterWindow
+{
+	type customizable_gui__window_character__main_characters__liege = vbox {
+		name = "liege"
+		datacontext = "[CharacterWindow.GetCharacter.GetLiegeEvenWhenDead]"
+		visible = "[CharacterWindow.HasLiegeEvenWhenDead]"
+		allow_outside = yes
+
+		margin_right = 20
+		layoutpolicy_vertical = expanding
+		using = Animation_Character_Window_Refresh
+
+		portrait_head_small = {
+			blockoverride "portrait_transformation"
+			{
+				portrait_scale = { -1 1 }
+				portrait_offset = { 1 0 }
+			}
+
+			blockoverride "coa" {
+				coa_realm_tiny = {
+					visible = "[And(CharacterWindow.GetCharacter.IsAlive, CharacterWindow.HasLiegeTitleEvenWhenDead)]"
+					parentanchor = bottom|left
+					position = { 3 -2 }
+					scale = 0.85
+				}
+
+				coa_title_tiny = {
+					visible = "[And(Not(CharacterWindow.GetCharacter.IsAlive), CharacterWindow.HasLiegeTitleEvenWhenDead)]"
+					datacontext = "[CharacterWindow.GetCharacter.GetLiegeTitleEvenWhenDead]"
+					parentanchor = bottom|left
+					position = { 3 -2 }
+					scale = 0.85
+				}
+			}
+		}
+
+		hbox = {
+			spacing = 3
+
+			text_label_center = {
+				datacontext = "[CharacterWindow.GetCharacter]"
+				visible = "[Character.IsHostage]"
+				text = "WARDEN_OF"
+			}
+
+			text_label_center = {
+				datacontext = "[CharacterWindow.GetCharacter]"
+				visible = "[Not( Character.IsHostage )]"
+				text = "[liege|E]"
+			}
+
+			icon = {
+				datacontext = "[CharacterWindow.GetCharacter]"
+				name = "non_dejure_liege"
+				visible = "[Not( Character.GetVassalContract.IsRightfulLiege )]"
+				size = { 30 30 }
+				texture = "gfx/interface/icons/levy_tax_reduction.dds"
+
+				using = tooltip_ws
+				tooltip = "MRW_TT_NOT_RIGHTFUL_LIEGE"
+			}
+		}
+
+
+		portrait_opinion = {
+			name = "liege_opinion"
+
+			datacontext = "[CharacterWindow.GetCharacter]"
+			visible = "[And( Character.GetLiege.IsValid, And( Character.IsAlive, Not(Character.IsLocalPlayer ) ) )]"
+
+			blockoverride "dread_logic" {
+				visible = "[Character.ShouldShowDreadEffectIconFor( Character.GetLiege )]"
+				frame = "[Character.GetDreadEffectIconFrameFor( Character.GetLiege )]"
+				tooltip = "[Character.GetDreadEffectTooltipFor( Character.GetLiege )]"
+			}
+
+			blockoverride "opinion_text"
+			{
+				text = "[Character.GetOpinionOf( Character.GetLiege )|=]"
+				fonttintcolor = "[Character.GetOpinionOfTint( CharacterWindow.GetCharacter.GetLiege )]"
+			}
+
+			blockoverride "ott_heading_text"
+			{
+				text = "[Character.GetOpinionHeadingText( CharacterWindow.GetCharacter.GetLiege )]"
+			}
+
+			blockoverride "ott_opinion_value_text"
+			{
+				text = "[Character.GetOpinionOf( Character.GetLiege )|=]"
+				fonttintcolor = "[Character.GetOpinionOfTint( CharacterWindow.GetCharacter.GetLiege )]"
+			}
+
+			blockoverride "ott_opinion_breakdown_text"
+			{
+				text = "[Character.GetOpinionBreakdownText( CharacterWindow.GetCharacter.GetLiege )]"
+			}
+			#[ IMHO ]
+
+			blockoverride "IMHO_opinion_text_player" {
+				text = "[Character.GetLiege.GetOpinionOf( Character.Self )|=]"
+				fonttintcolor = "[GetPlayer.GetOpinionOfTint( Character.Self )]"
+				tooltipwidget = character_opinion_tooltip_liege
+			}
+			#[/ IMHO ]
+		}
+		expand = {}
+	}
+}
