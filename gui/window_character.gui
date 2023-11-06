@@ -336,6 +336,13 @@ types CharacterWindow
 		#[/ SNAT ]
 
 		expand = {}
+
+		#[ SMT ]
+		button_plus = {
+			visible = "[Or(GreaterThan_int32(GetDataModelSize(CharacterWindow.GetTraits), '(int32)0'), GreaterThan_int32(GetDataModelSize(CharacterWindow.GetTimedModifiers), '(int32)0') )]"
+			onclick = "[CharacterWindow.ToggleExpandedTraits]"
+		}
+		#[/ SMT ]
 	}
 
 	type icon_row_header_background = icon
