@@ -85,11 +85,8 @@ types CharacterWindow
 						flipdirection = yes
 
 						item = {
-							icon = {
+							modifier_item_icon = {
 								size = { 35 35 }
-								alwaystransparent = no
-								texture = "[ModifierItem.GetIcon]"
-								tooltip = "[ModifierItem.GetTooltip]"
 							}
 						}
 					}
@@ -380,26 +377,7 @@ types CharacterWindow
 											using = tooltip_es
 											tooltip_offset = { 0 22 }
 
-											icon = {
-												name = "involved_banner"
-												visible = "[Struggle.IsInvolvedCharacter(Character.Self)]"
-												size = { 70 90 }
-												texture = "gfx/interface/icons/struggle_banners/involved_banner.dds"
-											}
-
-											icon = {
-												name = "interloper_banner"
-												visible = "[Struggle.IsInterloperCharacter(Character.Self)]"
-												size = { 70 90 }
-												texture = "gfx/interface/icons/struggle_banners/interloper_banner.dds"
-											}
-
-											icon = {
-												parentanchor = center
-												position = { 0 -7 }
-												texture = "[Struggle.GetCurrentPhase.GetIcon]"
-												size = { 40 40 }
-											}
+											widget_struggle_icon = {}
 										}
 									}
 
@@ -435,6 +413,158 @@ types CharacterWindow
 										portrait_offset = { 1 0 }
 									}
 								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+		# Modifiers expanded
+		scrollbox = {
+			name = "modifiers_expanded"
+			visible = "[CharacterWindow.AreModifiersExpanded]"
+			layoutpolicy_vertical = expanding
+			layoutpolicy_horizontal = expanding
+
+			using = Animation_Tab_Switch
+
+			blockoverride "scrollbox_content"
+			{
+				spacing = 15
+
+				text_label_center = {
+					text = "MODIFIERS"
+				}
+
+				vbox = {
+					layoutpolicy_horizontal = expanding
+					datamodel = "[CharacterWindow.GetTimedModifiers]"
+					spacing = 2
+
+					item = {
+						vbox = {
+							layoutpolicy_horizontal = expanding
+
+							hbox = {
+								layoutpolicy_horizontal = expanding
+
+								hbox = {
+									margin_right = 10
+									margin_top = 8
+									margin_left = -4
+
+									icon = {
+										size = { 32 32 }
+										texture = "[ModifierItem.GetIcon]"
+									}
+								}
+
+								text_single = {
+									layoutpolicy_horizontal = expanding
+									text = "[ModifierItem.GetStaticModifier.GetName]"
+								}
+							}
+
+							textbox = {
+								layoutpolicy_horizontal = expanding
+								visible = "[ModifierItem.HasTooltipDataByTag('single_modifier')]"
+								datacontext = "[ModifierItem.GetSingleModifierTooltipData]"
+								max_width = 500
+								using = DefaultTooltipText
+								multiline = yes
+								text = "[TimedModifierSingleItem.GetDesc]"
+								alwaystransparent = no
+							}
+
+							vbox = {
+								visible = "[ModifierItem.HasTooltipDataByTag('preview_list')]"
+								datacontext = "[ModifierItem.GetPreviewList]"
+								layoutpolicy_horizontal = expanding
+
+								textbox = {
+									layoutpolicy_horizontal = expanding
+									max_width = 500
+									using = DefaultTooltipText
+									multiline = yes
+									text = "[TimedModifierPreviewList.GetScaledDesc]"
+									alwaystransparent = no
+								}
+
+								vbox = {
+									datamodel = "[TimedModifierPreviewList.GetItems]"
+									layoutpolicy_horizontal = expanding
+									max_width = 500
+
+									item = {
+										vbox = {
+											layoutpolicy_horizontal = expanding
+
+											text_single = {
+												layoutpolicy_horizontal = expanding
+												text = "[TimedModifierPreviewItem.GetTitle]"
+											}
+
+											text_single = {
+												layoutpolicy_horizontal = expanding
+												text = "[TimedModifierPreviewItem.GetExpirationDate]"
+											}
+
+											expand = {}
+										}
+									}
+								}
+							}
+
+							vbox = {
+								layoutpolicy_horizontal = expanding
+								visible = "[ModifierItem.HasTooltipDataByTag('scaled_single_modifier')]"
+								datacontext = "[ModifierItem.GetScaledSingleModifierTooltipData]"
+
+								textbox = {
+									layoutpolicy_horizontal = expanding
+									max_width = 500
+									using = DefaultTooltipText
+									multiline = yes
+									text = "[TimedModifierScaledSingleItem.GetDesc]"
+									alwaystransparent = no
+								}
+
+								vbox = {
+									layoutpolicy_horizontal = expanding
+									datamodel = "[TimedModifierScaledSingleItem.GetEffectItems]"
+
+									item = {
+										textbox = {
+											layoutpolicy_horizontal = expanding
+											max_width = 500
+											margin_top = 5
+											margin_left = 10
+											margin_right = 5
+											margin_bottom = 10
+											using = DefaultTooltipText
+											using = Background_Area
+											text = "[CString.GetString]"
+											alwaystransparent = no
+										}
+									}
+								}
+
+								text_single = {
+									layoutpolicy_horizontal = growing
+									max_width = 500
+									text = "[TimedModifierScaledSingleItem.GetExpirationDate]"
+								}
+							}
+
+							spacer = {
+								size = { 2 10 }
+							}
+
+							divider_light = {
+								layoutpolicy_horizontal = expanding
+								# Don't show divider after the last item in the datamodel
+								visible = "[Not( EqualTo_int32( PdxGuiWidget.GetIndexInDataModel, Subtract_int32( GetDataModelSize( CharacterWindow.GetTimedModifiers ), '(int32)1' ) ) )]"
 							}
 						}
 					}
