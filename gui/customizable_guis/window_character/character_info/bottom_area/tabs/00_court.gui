@@ -1,0 +1,34 @@
+types CharacterWindow
+{
+	type customizable_gui__window_character__character_info__bottom_area__tabs__court = button_tab {
+		name = "court_button"
+		datacontext = "[CharacterWindow.GetCharacter]"
+		#	visible = "[Not(Character.IsPlayer)]"
+		visible = "[Not(GetGlobalVariable('SMYCP_is_loaded').IsSet)]"
+		layoutpolicy_horizontal = expanding
+
+		onclick = "[CharacterWindow.SetTab('court')]"
+		down = "[CharacterWindow.IsTabShown('court')]"
+
+		using = tooltip_above
+
+		hbox = {
+			text_single = {
+				layoutpolicy_horizontal = expanding
+				align = center
+				text = "CV_TAB_COURT"
+				default_format = "#low"
+			}
+
+			text_single = {
+				align = center
+				text = "[CharacterWindow.GetTabItemsCount('court')]"
+				default_format = "#low"
+				margin_right = 15
+				min_width = 30
+
+				using = Animation_Character_Window_Refresh
+			}
+		}
+	}
+}

@@ -1,0 +1,29 @@
+types CharacterWindow
+{
+	type customizable_gui__window_character__character_info__bottom_area__tabs = hbox {
+		name = "tabs"
+		visible = "[CharacterWindow.AreNoneExpanded]"
+		layoutpolicy_horizontal = expanding
+
+		# Customizable GUI: Family
+		customizable_gui__window_character__character_info__bottom_area__tabs__family = {}
+
+		# Customizable GUI: Relations
+		customizable_gui__window_character__character_info__bottom_area__tabs__relations = {}
+
+		# Customizable GUI: Court
+		customizable_gui__window_character__character_info__bottom_area__tabs__court = {}
+
+		#[ SMYC ]
+		using = SMYC_council_button
+		#[/ SMYC ]
+
+		#[ SMYC ]
+		SMYCP_court_button = {}
+		SMYCP_player_court_button = {}
+		#[/ SMYC ]
+
+		# Customizable GUI: Vassals
+		customizable_gui__window_character__character_info__bottom_area__tabs__vassals = {}
+	}
+}

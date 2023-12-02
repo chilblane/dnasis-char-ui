@@ -24,6 +24,10 @@ window = {
 		#[ CTFA ]
 		using = CTFA_character_window_show_state_actions
 		#[/ CTFA ]
+
+		#[ SMYC ]
+		on_start = "[GetVariableSystem.Set( 'SMYCP_player_court', 'true' )]"
+		#[/ SMYC ]
 	}
 
 	state = {
