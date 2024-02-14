@@ -29,8 +29,20 @@ types CharacterWindow
 				tooltip = "[Character.GetUINameNotMeNoTooltip]"
 			}
 
+			# Hometowns loaded
 			text_single = {
-				visible = "[Not(GetGlobalVariable('SNAT_is_loaded').IsSet)]"
+				visible = "[And(Not(GetGlobalVariable('SNAT_is_loaded').IsSet), GetGlobalVariable('hometowns_is_loaded').IsSet)]"
+				name = "character_age_hometown"
+				raw_text = " [Character.GetAge]"
+				default_format = "#low"
+				tooltip = "[SelectLocalization( Character.MakeScope.Var('hometowns_birthplace').IsSet, 'HOMETOWNS_BIRTHPLACE_TOOLTIP', 'VANILLA_BIRTHPLACE_TOOLTIP' )]"
+				fontsize = 20
+				align = nobaseline
+			}
+
+			# Hometowns not loaded
+			text_single = {
+				visible = "[And(Not(GetGlobalVariable('SNAT_is_loaded').IsSet), Not(GetGlobalVariable('hometowns_is_loaded').IsSet))]"
 				name = "character_age"
 				raw_text = " [Character.GetAge]"
 				default_format = "#low"
