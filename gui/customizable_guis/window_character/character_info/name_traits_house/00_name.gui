@@ -21,7 +21,7 @@ types CharacterWindow
 				name = "character_name_vanilla" #unique name to prevent SNAT conflicts
 				raw_text = "[Character.GetUINameNotMeNoTooltip], "
 				margin_left = 2
-				max_width = 400
+				max_width = 398
 				fontsize = 20
 				fontsize_min = 14
 				align = nobaseline
