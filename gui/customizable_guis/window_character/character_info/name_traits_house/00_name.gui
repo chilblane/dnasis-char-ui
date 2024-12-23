@@ -17,8 +17,8 @@ types CharacterWindow
 			SNAT_character_name = {}
 			
 			text_single = {
-				visible = "[Not(GetGlobalVariable('SNAT_is_loaded').IsSet)]"
-				name = "character_name_vanilla" #unique name to prevent SNAT conflicts
+				visible = "[Not(GetGlobalVariable( 'SNAT_is_loaded' ).IsSet)]"
+				name = "character_name"
 				raw_text = "[Character.GetUINameNotMeNoTooltip], "
 				margin_left = 2
 				max_width = 398

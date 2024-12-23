@@ -9,6 +9,10 @@ types CharacterWindow
 			layoutpolicy_horizontal = expanding
 			margin = { 0 5 }
 			margin_left = 5
+			using = Animation_ShowHide_Quick
+			visible = "[Not( GreaterThan_CFixedPoint( GetPlayer.MakeScope.Var('hide_ui_character_info').GetValue, '(CFixedPoint)0' ) )]"
+			using = Animation_ShowHide_Quick
+
 
 			background = {
 				using = Background_Area_Dark
@@ -172,9 +176,9 @@ types CharacterWindow
 					text = "CV_TITLES_NOCOUNT"
 				}
 
-				#[ CTFA ]
+				# MOD(custom-form-of-address)
 				CTFA_fixedgridbox_titles_box_bishop = {}
-				#[/ CTFA ]
+				# END MOD
 
 				fixedgridbox = {
 					name = "titles_box_bishop"
@@ -184,9 +188,9 @@ types CharacterWindow
 					addcolumn = 270
 					datamodel_wrap = 2
 
-					#[ CTFA ]
+					# MOD(custom-form-of-address)
 					using = CTFA_hide_if_has_vanity_title
-					#[/ CTFA ]
+					# END MOD
 
 					datamodel = "[CharacterWindow.GetTitles]"
 

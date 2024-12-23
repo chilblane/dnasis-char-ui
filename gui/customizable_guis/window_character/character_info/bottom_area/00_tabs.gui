@@ -2,8 +2,9 @@ types CharacterWindow
 {
 	type customizable_gui__window_character__character_info__bottom_area__tabs = hbox {
 		name = "tabs"
-		visible = "[CharacterWindow.AreNoneExpanded]"
+		visible = "[And(CharacterWindow.AreNoneExpanded, Not( GreaterThan_CFixedPoint( GetPlayer.MakeScope.Var('hide_ui_character_sheet_bottom').GetValue, '(CFixedPoint)0' ) ))]"
 		layoutpolicy_horizontal = expanding
+		using = Animation_ShowHide_Quick
 
 		# Customizable GUI: Family
 		customizable_gui__window_character__character_info__bottom_area__tabs__family = {}

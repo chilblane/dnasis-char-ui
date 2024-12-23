@@ -27,16 +27,17 @@ types CharacterWindow
 			}
 		}
 
-		# Customizable GUI: Buttons (on the top right corner)
-		customizable_gui__window_character__main_characters__buttons = {}
-
 		# Customizable GUI: Primary Spouse
 		customizable_gui__window_character__main_characters__spouse = {}
 
 		# Customizable GUI: Main Character
 		customizable_gui__window_character__main_characters__main = {}
 
-		expand = {}
+		# Customizable GUI: Secondary Widget
+		customizable_gui__window_character__main_characters__secondary = {}
+
+		# Customizable GUI: Buttons (on the top right corner)
+		customizable_gui__window_character__main_characters__buttons = {}
 
 		hbox = {
 			margin_top = 50

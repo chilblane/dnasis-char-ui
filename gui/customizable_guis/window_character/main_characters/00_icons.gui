@@ -12,6 +12,7 @@ types CharacterWindow
 
 		#[ SBfA ]
 		using = SBfA_character_stress_bar
+		using = CM_character_stress_bar
 		#[/ SBfA ]
 
 		# Customizable GUI: Languages

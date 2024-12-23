@@ -121,4 +121,117 @@ types CharacterWindow
 			}
 		}
 	}
+
+	###################################
+	# キャラクター名 / Character Name #
+	###################################
+	type SNAT_character_name = hbox {
+		name = "character_name_SNAT"
+		layoutpolicy_horizontal = expanding
+		margin = { 0 -1 }
+		visible = "[GetGlobalVariable( 'SNAT_is_loaded' ).IsSet]"
+
+		text_single = {
+			text = "SNAT_CHARACTER_NAME_TEXT"
+			margin_left = 2
+			max_width = 400
+			fontsize = 20
+			fontsize_min = 14
+			align = nobaseline
+			default_format = "#high"
+			tooltip = "[Character.GetUINameNotMeNoTooltip]"
+		}
+
+		expand = {}
+
+		### COMPATIBILITY "GenderIcons"
+		icon = {
+			visible = "[Not(Character.IsFemale)]"
+			size = { 20 20 }
+			texture = "gfx/interface/icons/character_status/sex_icon_male.dds"
+			tooltip = "SEX_TT"
+		}
+
+		icon = {
+			visible = "[Character.IsFemale]"
+			size = { 20 20 }
+			texture = "gfx/interface/icons/character_status/sex_icon_female.dds"
+			tooltip = "SEX_TT"
+		}
+		### ComEnd
+	}
+
+	##################
+	# 王朝 / Dynasty #
+	##################
+	type SNAT_character_dynasty = hbox {
+		name = "character_dynasty"
+		
+
+		hbox = {
+			datacontext = "[Character.GetDynasty]"
+			visible = "[And( DynastyHouse.IsValid, Not( DynastyHouse.IsFoundingHouse ) )]"
+
+			# 分家である / Is Cadet branch
+			text_multi = {
+				autoresize = yes
+				maximumsize = { 118 30 }
+				text = "[DynastyHouse.GetDynasty.GetBaseNameNoTooltip]"
+				fontsize = 14
+				default_format = "#medium"
+				align = top|hcenter
+			}
+
+			tooltipwidget = {
+				using = DynastyTooltip
+			}
+		}
+
+		# 分家でない、または庶民 / Not Cadet branch, or is Lowborn
+		text_multi = {
+			autoresize = yes
+			maximumsize = { 118 30 }
+			visible = "[Or( Not( DynastyHouse.IsValid ), DynastyHouse.IsFoundingHouse )]"
+			text = " "
+			fontsize = 14
+			default_format = "#medium"
+			align = top|hcenter
+		}
+	}
+
+	##############
+	# 家 / House #
+	##############
+	type SNAT_character_house = hbox {
+		name = "character_house"
+		visible = "[And(DynastyHouse.IsValid), (GetGlobalVariable('SNAT_is_loaded').IsSet)]"
+
+		# 本家である / Is Founding House
+		hbox = {
+			datacontext = "[Character.GetDynasty]"
+			visible = "[DynastyHouse.IsFoundingHouse]"
+
+			text_multi = {
+				autoresize = yes
+				maximumsize = { 118 50 }
+				text = "[DynastyHouse.GetBaseNameNoTooltip]"
+				default_format = "#high"
+				align = top|hcenter
+			}
+
+			tooltipwidget = {
+				using = DynastyTooltip
+			}
+		}
+
+		# 本家でない / Not Founding House
+		text_multi = {
+			autoresize = yes
+			maximumsize = { 118 50 }
+			visible = "[Not( DynastyHouse.IsFoundingHouse )]"
+			text = "[DynastyHouse.GetBaseNameNoTooltip]"
+			default_format = "#high"
+			align = top|hcenter
+		}
+	}
 }

@@ -4,6 +4,8 @@ types CharacterWindow
 		datacontext = "[GetIllustration( 'character_location_exterior' )]"
 		layoutpolicy_horizontal = expanding
 		size = { 0 232 }
+		using = Animation_ShowHide_Quick
+		visible = "[Not( GreaterThan_CFixedPoint( GetPlayer.MakeScope.Var('hide_ui_realm').GetValue, '(CFixedPoint)0' ) )]"
 
 		background = {
 			using = Background_Bottom_Fade
@@ -31,35 +33,52 @@ types CharacterWindow
 			}
 		}
 
-		hbox = {
+		vbox = {
 			name = "realm_info"
+			min_width = 592
 
-			# Customizable GUI: Realm Shield
-			customizable_gui__window_character__character_info__realm__shield = {}
+			hbox_character_view_secondary_stats_bar = {}
 
-			vbox = {
+			hbox = {
 				layoutpolicy_horizontal = expanding
 				layoutpolicy_vertical = expanding
-				margin_left = 5
 
-				# Customizable GUI: Realm name and Stats
-				customizable_gui__window_character__character_info__realm__name_stats = {}
+				# Customizable GUI: Realm Shield
+				customizable_gui__window_character__character_info__realm__shield = {}
 
-				divider = {
+				vbox = {
 					layoutpolicy_horizontal = expanding
+					layoutpolicy_vertical = expanding
+					margin_left = 5
+
+					# Customizable GUI: Realm name and Stats
+					customizable_gui__window_character__character_info__realm__name_stats = {}
+
+					hbox = {
+						layoutpolicy_horizontal = expanding
+						layoutpolicy_vertical = expanding
+						margin_right = 2
+
+						# MOD(custom-form-of-address)
+						CTFA_vbox_titles_claims_box = {}
+						# END MOD
+
+						# Customizable GUI: Titles and Claims without Diplomacy
+						customizable_gui__window_character__character_info__realm__titles_claims_without_diplomacy = {}
+
+						expand = {
+							layoutpolicy_horizontal = expanding
+							visible = "[Character.GetPrimaryTitle.HasFaction]"
+						}
+						expand = {}
+					}
+					expand = {}
 				}
 
-				#[ CTFA ]
-				CTFA_vbox_titles_claims_box_1 = {}
-				#[/ CTFA ]
-
-				# Customizable GUI: Titles and Claims without Diplomacy
-				customizable_gui__window_character__character_info__realm__titles_claims_without_diplomacy = {}
+				expand = {}
 
 				# Customizable GUI: Titles and Claims with Diplomacy
 				customizable_gui__window_character__character_info__realm__titles_claims_with_diplomacy = {}
-
-				expand = {}
 			}
 		}
 	}
