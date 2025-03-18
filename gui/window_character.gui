@@ -1256,7 +1256,7 @@ types CharacterWindow
 			position = { 0 -3 }
 			size = { 30 30 }
 			texture = "gfx/interface/icons/scale_of_power.dds"
-			tooltip = IN_ACTIVE_DIARCHY
+			tooltip = DIARCH_ICON_TOOLTIP
 			using = tooltip_below
 		}
 
@@ -1297,6 +1297,7 @@ types CharacterWindow
 				expand = {}
 
 				tooltip = "[Character.GetGoldTooltipWithBalance]"
+				using = tooltip_se
 
 				icon = {
 					name = "icon_gold"
@@ -1325,6 +1326,7 @@ types CharacterWindow
 				spacing = 2
 
 				tooltip = "[Character.GetPrestigeTooltipWithBalance]"
+				using = tooltip_se
 
 				divider_light = {
 					layoutpolicy_vertical = expanding
@@ -1358,6 +1360,7 @@ types CharacterWindow
 			hbox = {
 
 				tooltip = "[Character.GetPietyTooltipWithBalance]"
+				using = tooltip_se
 
 				divider_light = {
 					layoutpolicy_vertical = expanding
@@ -1392,6 +1395,7 @@ types CharacterWindow
 				visible = "[Character.GetGovernment.HasRule( 'administrative' )]"
 
 				tooltip = "[Character.GetInfluenceTooltipWithBalance]"
+				using = tooltip_se
 
 				divider_light = {
 					layoutpolicy_vertical = expanding
@@ -1418,6 +1422,11 @@ types CharacterWindow
 			}
 		}
 
+		widget = {
+			size = { 72 32 }
+			visible = "[Or( Not(Character.GetLegitimacyType.IsValid), Not(Character.GetGovernment.HasRule( 'legitimacy' )) )]"
+		}
+
 		#Legitimacy
 		widget = {
 			layoutpolicy_vertical = expanding
@@ -1426,9 +1435,6 @@ types CharacterWindow
 			datacontext = "[Character.GetLegitimacyType]"
 			datacontext = "[Character.GetLegitimacyLevel]"
 
-			using = tooltip_ne
-
-			hbox = {
 				visible = "[And(LegitimacyType.IsValid, Character.GetGovernment.HasRule( 'legitimacy' ))]"
 
 				tooltipwidget = {
@@ -1436,6 +1442,11 @@ types CharacterWindow
 						datacontext = "[CharacterWindow.GetLegitimacyBar]"
 					}
 				}
+			using = tooltip_se
+		
+
+			hbox = {
+				visible = "[And(LegitimacyType.IsValid, Character.GetGovernment.HasRule( 'legitimacy' ))]"
 
 				divider_light = {
 					layoutpolicy_vertical = expanding
@@ -1468,6 +1479,7 @@ types CharacterWindow
 				visible = "[Character.HasLandedTitles]"
 
 				tooltip = "[Character.GetDreadBreakdown]"
+				using = tooltip_se
 
 				divider_light = {
 					layoutpolicy_vertical = expanding

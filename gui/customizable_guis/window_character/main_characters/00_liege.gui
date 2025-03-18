@@ -38,20 +38,20 @@ types CharacterWindow
 		hbox = {
 			spacing = 3
 
+			datacontext = "[CharacterWindow.GetCharacter]"
+
 			text_label_center = {
-				datacontext = "[CharacterWindow.GetCharacter]"
 				visible = "[Character.IsHostage]"
 				text = "WARDEN_OF"
 			}
 
 			text_label_center = {
-				datacontext = "[CharacterWindow.GetCharacter]"
 				visible = "[Not( Character.IsHostage )]"
 				text = "[liege|E]"
 			}
 
 			icon = {
-				datacontext = "[CharacterWindow.GetCharacter]"
+				
 				name = "non_dejure_liege"
 				visible = "[Not( Character.GetVassalContract.IsRightfulLiege )]"
 				size = { 30 30 }
@@ -59,6 +59,15 @@ types CharacterWindow
 
 				using = tooltip_ws
 				tooltip = "MRW_TT_NOT_RIGHTFUL_LIEGE"
+			}
+
+			icon = {
+				name = "diarchy_active_icon"
+				visible = "[Character.IsDiarchOf( Character.GetLiege )]"
+				size = { 25 25 }
+				texture = "gfx/interface/icons/scale_of_power.dds"
+				tooltip = DIARCH_ICON_TOOLTIP
+				using = tooltip_below
 			}
 		}
 
