@@ -17,7 +17,7 @@ types CharacterWindow
 		}
 		icon_culture_pillar = {
 			size = { 30 30 }
-			texture = "gfx/interface/icons/culture_pillars/language.dds"
+			texture = "gfx/interface/icons/flat_icons/map_modes/court_languages.dds"
 		}
 	}
 }

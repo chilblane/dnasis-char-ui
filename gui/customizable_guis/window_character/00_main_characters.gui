@@ -52,6 +52,9 @@ types CharacterWindow
 
 			# Customizable GUI: Liege
 			customizable_gui__window_character__main_characters__liege = {}
+
+			# Customizable GUI: Suzerain
+			customizable_gui__window_character__main_characters__suzerain = {}
 		}
 
 		# Customizable GUI: Host
