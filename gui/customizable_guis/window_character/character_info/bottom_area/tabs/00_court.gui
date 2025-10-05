@@ -1,78 +1,32 @@
 types CharacterWindow
 {
-	type customizable_gui__window_character__character_info__bottom_area__court = vbox_character_list {
-		datacontext = "[CharacterWindow.GetCourt]"
-		visible = "[CharacterWindow.IsTabShown('court')]"
+	type customizable_gui__window_character__character_info__bottom_area__tabs__court = button_tab {
+		name = "court_button"
+		datacontext = "[CharacterWindow.GetCharacter]"
+		#	visible = "[Not(Character.IsPlayer)]"
+		layoutpolicy_horizontal = expanding
 
-		blockoverride "sort_dropdown" {
-			dropdown_sort_characterlist = {
-				# unique name needed to distinct from vassal sort options
-				name = "court_sort_options"
-			}
-		}
+		onclick = "[CharacterWindow.SetTab('court')]"
+		down = "[CharacterWindow.IsTabShown('court')]"
 
-		blockoverride "scrollbox_margins" {
-			margin_right = 15
-			margin_top = 10
-		}
+		using = tooltip_above
 
-		blockoverride "container_implementation" {
-			fixedgridbox = {
-				name = "characters_grid"
-				datamodel = "[CharacterSelectionList.GetList]"
-				visible = "[Not(CharacterSelectionList.IsBuildingList)]"
-				addcolumn = 560
-				addrow = 125
-				setitemsizefromcell = yes
-
-				item = {
-					widget_courtier_item = {
-						datacontext = "[CharacterListItem.GetCharacter]"
-
-						# blockoverride "description_relation_text" {
-						# 	text = "[Character.GetSpecialGuestRelationDescription]"
-						# }
-
-						blockoverride "gridbox_items"
-						{
-							datamodel_wrap = 7
-							maxverticalslots = 2
-						}
-
-						blockoverride "action_buttons" {}
-					}
-				}
-			}
-		}
-
-		blockoverride "character_count"
-		{
-			hbox = {
-				layoutpolicy_horizontal = growing
-				margin = { 15 0 }
-				margin_bottom = 5
-				spacing = 5
-
-				block "bottom_bar" {}
-
-				expand = {}
-
-				widget = {
-					size = { 20 15 }
-
-					warning_icon = {
-						size = { 20 20 }
-						visible = "[Not( CharacterSelectionList.IsAllDefault )]"
-						tooltip = "CHARACTER_FINDER_FILTER_SET"
-					}
+		hbox = {
+			text_single = {
+				layoutpolicy_horizontal = expanding
+				align = center
+				text = "CV_TAB_COURT"
+				default_format = "#low"
 			}
 
 			text_single = {
-					name = "character_count"
-					datacontext = "[CharacterSelectionList]"
-					text = "CHARACTER_FINDER_COUNT"
+				align = center
+				text = "[CharacterWindow.GetTabItemsCount('court')]"
 				default_format = "#low"
-				}
+				margin_right = 15
+				min_width = 30
+
+				using = Animation_Character_Window_Refresh
 			}
 		}
 	}

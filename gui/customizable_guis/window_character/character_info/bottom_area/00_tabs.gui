@@ -15,15 +15,6 @@ types CharacterWindow
 		# Customizable GUI: Court
 		customizable_gui__window_character__character_info__bottom_area__tabs__court = {}
 
-		#[ SMYC ]
-		using = SMYC_council_button
-		#[/ SMYC ]
-
-		#[ SMYC ]
-		SMYCP_court_button = {}
-		SMYCP_player_court_button = {}
-		#[/ SMYC ]
-
 		# Customizable GUI: Vassals
 		customizable_gui__window_character__character_info__bottom_area__tabs__vassals = {}
 	}
